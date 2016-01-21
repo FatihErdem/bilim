@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Konya Bilim Merkezi</title>
+
+    <th:block th:include="layouts/head :: head"></th:block>
+
+
+</head>
+<body>
+<th:block th:include="layouts/main :: main">
+
+
+</th:block>
+<div>
+
+
+    <div id="page-wrapper">
+        <div class="container" style="margin-top: 5%">
+
+            <div class="container">
+                <div class="col-md-8 col-md-offset-2 well  ">
+                    <h2 style="text-align: center">Galeri Ekle</h2>
+                    <br/>
+                    <br/>
+                    <form action="#" th:action="@{/galleries/create}" th:object="${gallery}" method="post">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="galleryId">Galeri ID</label>
+                                <input type="number" class="form-control" id="galleryId" placeholder="Galeri ID"
+                                       th:field="*{galleryId}" th:value="*{galleryId}"/>
+                            </div>
+                            <div th:if="${#fields.hasErrors('galleryId')}" class="alert alert-danger">
+                                <p th:errors="*{galleryId}"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="galleryName">Galeri Adı</label>
+                                <input type="text" class="form-control" id="galleryName" placeholder="Galeri Adı"
+                                       th:field="*{galleryName}" th:value="*{galleryName}"/>
+                            </div>
+                            <div th:if="${#fields.hasErrors('galleryName')}" class="alert alert-danger">
+                                <p th:errors="*{galleryName}"></p>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-info" th:type="submit">Submit</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<!-- jQuery -->
+<script src="/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

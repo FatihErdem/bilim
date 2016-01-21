@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="layouts/head :: head"></th:block>
+    <link href="/css/dataTables.min.css" rel="stylesheet"/>
+    <link href="/css/dataTables.bootstrap.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+
+<th:block th:include="layouts/main :: main"></th:block>
+
+
+<div id="page-wrapper">
+    <div class="container">
+        <h2 style="text-align: center">Kayıtlı iBeaconların Listesi</h2>
+        <br/>
+        <br/>
+        <br/>
+
+
+        <table id="beaconTable" class="display cell-border" cellspacing="0">
+            <thead>
+            <tr>
+                <th>iBeacon UUID</th>
+                <th>iBeacon ID</th>
+                <th>iBeacon Sınıfı</th>
+                <th>iBeacon Pil Seviyesi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="beacon : ${beacons}">
+                <td th:text="${beacon.beaconUUID}">sdd</td>
+                <td th:text="${beacon.beaconId}">Onions</td>
+                <td th:text="${beacon.beaconClass}">2.41</td>
+                <td th:text="${beacon.batteryLevel}">yes</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#beaconTable').DataTable({
+            "order": [[3, "desc"]],
+            "pageLength": 15
+
+        });
+    });
+</script>
+</body>
+</html>
