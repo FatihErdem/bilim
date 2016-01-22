@@ -14,7 +14,7 @@ import java.util.List;
 public class TableDataConverter {
 
 
-    public static List<VisitReport> convertGalleryToDataTable(List<VisitReport> visitReportsList, MongoTemplate mongoTemplate) {
+    public static List<VisitReport> convertScienceToDataTable(List<VisitReport> visitReportsList, MongoTemplate mongoTemplate) {
 
 
         for (VisitReport visitReport : visitReportsList) {
@@ -24,4 +24,14 @@ public class TableDataConverter {
 
         return visitReportsList;
     }
+
+//    public static List<VisitReport> convertGalleryToDataTable(List<VisitReport> visitReports, MongoTemplate mongoTemplate){
+//
+//        for (VisitReport visitReport : visitReports){
+//            Gallery gallery = mongoTemplate.findOne(query(where("galleryName").is(visitReport.getGalleryName())), Gallery.class);
+//            visitReport.setGalleryId(gallery.getGalleryId());
+//        }
+//
+//        return visitReports;
+//    }
 }

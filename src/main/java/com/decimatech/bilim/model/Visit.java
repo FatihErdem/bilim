@@ -52,8 +52,6 @@ public class Visit {
         this.beaconClass = beaconClass;
     }
 
-
-
     public String getBeaconUUID() {
         return beaconUUID;
     }

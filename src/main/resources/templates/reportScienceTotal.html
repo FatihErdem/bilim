@@ -24,10 +24,7 @@
 
                 <div align="center">
                     <canvas style="margin-right: 60px" id="myChart" width="300" height="300"></canvas>
-
                     <canvas style="margin-left: 25px" id="barChart" width="750" height="300"></canvas>
-
-
                 </div>
 
                 <br/>
@@ -56,7 +53,7 @@
                         <td th:text="${visit.galleryName}">Onions</td>
                         <td th:text="${visit.totalTime}">100</td>
                         <td>
-                            <a th:href="@{/gallery/update/__${visit.galleryId}__}">Detay</a>
+                            <a th:href="@{/records/gallerytotal/__${visit.galleryId}__}">Detay</a>
                         </td>
 
                     </tr>

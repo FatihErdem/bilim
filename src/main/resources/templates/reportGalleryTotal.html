@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="layouts/head :: head"></th:block>
+    <link href="/css/dataTables.min.css" rel="stylesheet"/>
+    <link href="/css/dataTables.bootstrap.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+
+<th:block th:include="layouts/main :: main"></th:block>
+
+<div id="wrapper">
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <h2 style="text-align: center"><span th:text="${galleryName}"></span> Galeri Bazlı Rapor</h2>
+            <br/>
+            <br/>
+            <br/>
+
+            <div align="center">
+                <canvas style="margin-right: 60px" id="myChart" width="300" height="300"></canvas>
+
+                <canvas style="margin-left: 25px" id="lineChart" width="750" height="300"></canvas>
+
+
+            </div>
+
+            <br/>
+            <br/>
+            <br/>
+            <div align="center">
+
+            </div>
+
+            <br/>
+            <br/>
+
+
+            <table id="reportTable" class="display cell-border" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>İstasyon Numarası</th>
+                    <th>Harcanan Süre(sn)</th>
+                    <th>Detay</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="visit : ${tableData}">
+                    <td th:text="${visit.stationId}">100</td>
+                    <td th:text="${visit.totalTime}">100</td>
+                    <td>
+                        <a th:href="@{/records/stationtotal/__${visit.stationId}__}">Detay</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.js"></script>
+<script src="/js/Chart.min.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    $(document).ready(function () {
+        $('#reportTable').DataTable({
+
+            "order": [[0, "asc"]],
+            "pageLength": 15
+        });
+
+        var ctx = $("#myChart").get(0).getContext("2d");
+        var data = /*[[${pieData}]]*/;
+        var myPieChart = new Chart(ctx).Doughnut(data);
+
+        var ctx = $("#lineChart").get(0).getContext("2d");
+        var data1 = /*[[${lineData}]]*/;
+        var myBarChart = new Chart(ctx).Line(data1, {
+            bezierCurve: false,
+            pointDotRadius: 6
+        });
+    });
+    /*]]>*/
+
+</script>
+
+</body>
+</html>
