@@ -45,14 +45,14 @@
                 <thead>
                 <tr>
                     <th>İstasyon Numarası</th>
-                    <th>Harcanan Süre(sn)</th>
+                    <th>Harcanan Süre (Dakika)</th>
                     <th>Detay</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="visit : ${tableData}">
                     <td th:text="${visit.stationId}">100</td>
-                    <td th:text="${visit.totalTime}">100</td>
+                    <td ><span th:text="${visit.totalTime}"></span> dakika</td>
                     <td>
                         <a th:href="@{/records/stationtotal/__${visit.stationId}__}">Detay</a>
                     </td>

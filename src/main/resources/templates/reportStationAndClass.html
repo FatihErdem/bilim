@@ -25,14 +25,14 @@
             <tr>
                 <th>İstasyon ID</th>
                 <th>Grup Id</th>
-                <th>Harcanan Süre</th>
+                <th>Harcanan Süre (Dakika)</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="record : ${records}">
                 <td th:text="${record.stationId}">sdd</td>
                 <td th:text="${record.beaconClass}">sdd</td>
-                <td th:text="${record.totalTime}">Onions</td>
+                <td ><span th:text="${record.totalTime}"></span> dakika</td>
             </tr>
             </tbody>
         </table>

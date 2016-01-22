@@ -43,7 +43,7 @@
                     <tr>
                         <th>Galeri ID</th>
                         <th>Galeri Açıklama</th>
-                        <th>Harcanan Süre(sn)</th>
+                        <th>Harcanan Süre (Dakika)</th>
                         <th>Detay</th>
                     </tr>
                     </thead>
@@ -51,7 +51,7 @@
                     <tr th:each="visit : ${tableData}">
                         <td th:text="${visit.galleryId}">0</td>
                         <td th:text="${visit.galleryName}">Onions</td>
-                        <td th:text="${visit.totalTime}">100</td>
+                        <td ><span th:text="${visit.totalTime}"></span> dakika</td>
                         <td>
                             <a th:href="@{/records/gallerytotal/__${visit.galleryId}__}">Detay</a>
                         </td>

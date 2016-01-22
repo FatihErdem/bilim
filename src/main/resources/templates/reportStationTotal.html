@@ -46,14 +46,14 @@
                 <tr>
                     <th>İstasyon Numarası</th>
                     <th>Grup No</th>
-                    <th>Harcanan Sure (Sn)</th>
+                    <th>Harcanan Süre (Dakika)</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="visit : ${tableData}">
                     <td th:text="${visit.stationId}">100</td>
                     <td th:text="${visit.beaconClass}">100</td>
-                    <td th:text="${visit.totalTime}"></td>
+                    <td ><span th:text="${visit.totalTime}"></span> dakika</td>
                  </tr>
                 </tbody>
             </table>

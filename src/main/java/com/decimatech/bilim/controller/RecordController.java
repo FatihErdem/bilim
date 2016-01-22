@@ -82,6 +82,7 @@ public class RecordController {
                 group("galleryName").sum("elapsedTime").as("totalTime"),
                 project("_id", "totalTime")
                         .and("_id").as("galleryName")
+                        .and("totalTime").divide(60).as("totalTime")
         );
 
         AggregationResults<VisitReport> results = mongoTemplate.aggregate(aggregation, Visit.class, VisitReport.class);
@@ -109,7 +110,8 @@ public class RecordController {
                 match(where("galleryName").is(galleryName)),
                 group("stationId").sum("elapsedTime").as("totalTime"),
                 project("_id", "totalTime")
-                        .and("_id").as("stationId"),
+                        .and("_id").as("stationId")
+                        .and("totalTime").divide(60).as("totalTime"),
                 sort(Sort.Direction.DESC, "totalTime")
         );
 
@@ -132,7 +134,9 @@ public class RecordController {
 
         Aggregation aggregation = newAggregation(
                 match(where("stationId").is(stationId)),
-                group("stationId", "beaconClass").sum("elapsedTime").as("totalTime")
+                group("stationId", "beaconClass").sum("elapsedTime").as("totalTime"),
+                project("stationId", "beaconClass", "totalTime")
+                        .and("totalTime").divide(60).as("totalTime")
         );
 
         AggregationResults<VisitReport> results = mongoTemplate.aggregate(aggregation, Visit.class, VisitReport.class);
