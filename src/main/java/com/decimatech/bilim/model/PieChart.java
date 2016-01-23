@@ -3,6 +3,15 @@ package com.decimatech.bilim.model;
 public class PieChart {
     private String label;
     private Integer value;
+    private String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public String getLabel() {
         return label;
@@ -25,6 +34,7 @@ public class PieChart {
         return "PieChart{" +
                 "label='" + label + '\'' +
                 ", value=" + value +
+                ", color='" + color + '\'' +
                 '}';
     }
 }

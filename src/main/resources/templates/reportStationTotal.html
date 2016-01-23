@@ -22,24 +22,46 @@
             <br/>
             <br/>
 
-            <div align="center">
-                <canvas style="margin-right: 60px" id="myChart" width="300" height="300"></canvas>
+            <div class="row" align="center">
+                <div class="col-md-3">
+                    <div align="center" class="row">
+                        <canvas id="pieChart" width="250" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>Gruplara Göre Ziyaret Oranları</h4>
+                    </div>
+                </div>
 
-                <canvas style="margin-left: 25px" id="lineChart" width="750" height="300"></canvas>
+                <div class="col-md-3">
+                    <div align="center" class="row">
+                        <canvas id="beaconChart" width="250" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>Tekil Ziyaretçi Oranı</h4>
+                    </div>
+                </div>
 
+                <div class="col-md-6">
+                    <div align="center" class="row">
+                        <canvas id="lineChart" width="750" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>Harcanan Süre-Grup Grafiği</h4>
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
 
             </div>
 
-            <br/>
-            <br/>
-            <br/>
-            <div align="center">
-
-            </div>
-
-            <br/>
-            <br/>
-
+            <div class="col-md-12" style="margin-top: 5%">
 
             <table id="reportTable" class="display cell-border" cellspacing="0">
                 <thead>
@@ -58,7 +80,7 @@
                 </tbody>
             </table>
 
-
+            </div>
         </div>
     </div>
 </div>
@@ -78,9 +100,13 @@
             "pageLength": 15
         });
 
-        var ctx = $("#myChart").get(0).getContext("2d");
+        var ctx = $("#pieChart").get(0).getContext("2d");
         var data = /*[[${pieData}]]*/;
         var myPieChart = new Chart(ctx).Doughnut(data);
+
+        var ctx1 = $("#beaconChart").get(0).getContext("2d");
+        var data2 = /*[[${beaconStat}]]*/;
+        var myPieChart = new Chart(ctx1).Doughnut(data2);
 
         var ctx = $("#lineChart").get(0).getContext("2d");
         var data1 = /*[[${barData}]]*/;

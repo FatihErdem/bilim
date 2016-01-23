@@ -17,27 +17,42 @@
 
         <div class="container-fluid">
 
-                <h2 style="text-align: center">Bilim Merkezi Genel Raporu</h2>
-                <br/>
-                <br/>
-                <br/>
+            <h2 style="text-align: center">Bilim Merkezi Genel Raporu</h2>
+            <br/>
+            <br/>
+            <br/>
 
-                <div align="center">
-                    <canvas style="margin-right: 60px" id="myChart" width="300" height="300"></canvas>
-                    <canvas style="margin-left: 25px" id="barChart" width="750" height="300"></canvas>
+            <div class="row" align="center">
+                <div class="col-md-4">
+                    <div align="center" class="row">
+                        <canvas id="pieChart" width="250" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>Bütün Galerilerin Gezilme Oranları</h4>
+                    </div>
+                </div>
+
+
+                <div class="col-md-8">
+                    <div align="center" class="row">
+                        <canvas style="margin-left: 50px" id="barChart" width="750" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>Harcanan Süre-Galeri Grafiği</h4>
+                    </div>
                 </div>
 
                 <br/>
                 <br/>
-                <br/>
-                <div align="center">
 
-                </div>
-
-                <br/>
-                <br/>
+            </div>
 
 
+            <div class="col-md-12" style="margin-top: 5%">
                 <table id="reportTable" class="display cell-border" cellspacing="0">
                     <thead>
                     <tr>
@@ -51,7 +66,7 @@
                     <tr th:each="visit : ${tableData}">
                         <td th:text="${visit.galleryId}">0</td>
                         <td th:text="${visit.galleryName}">Onions</td>
-                        <td ><span th:text="${visit.totalTime}"></span> dakika</td>
+                        <td><span th:text="${visit.totalTime}"></span> dakika</td>
                         <td>
                             <a th:href="@{/records/gallerytotal/__${visit.galleryId}__}">Detay</a>
                         </td>
@@ -59,8 +74,7 @@
                     </tr>
                     </tbody>
                 </table>
-
-
+            </div>
         </div>
     </div>
 </div>
@@ -77,7 +91,7 @@
             "order": [[0, "asc"]],
             "pageLength": 15
         });
-        var ctx = $("#myChart").get(0).getContext("2d");
+        var ctx = $("#pieChart").get(0).getContext("2d");
         var data = /*[[${pieData}]]*/;
         var myPieChart = new Chart(ctx).Doughnut(data);
 

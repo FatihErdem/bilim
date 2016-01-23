@@ -22,46 +22,69 @@
             <br/>
             <br/>
 
-            <div align="center">
-                <canvas style="margin-right: 60px" id="myChart" width="300" height="300"></canvas>
+            <div class="row" align="center">
+                <div class="col-md-3">
+                    <div align="center" class="row">
+                        <canvas id="pieChart" width="250" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>En Çok Ziyaret Edilen 3 İstasyon</h4>
+                    </div>
+                </div>
 
-                <canvas style="margin-left: 25px" id="lineChart" width="750" height="300"></canvas>
+                <div class="col-md-3">
+                    <div align="center" class="row">
+                        <canvas id="beaconChart" width="250" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>Tekil Ziyaretçi Oranları</h4>
+                    </div>
+                </div>
 
+                <div class="col-md-6">
+                    <div align="center" class="row">
+                        <canvas id="lineChart" width="750" height="250"></canvas>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div align="center" class="row">
+                        <h4>Harcanan Süre-İstasyon Grafiği</h4>
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
 
             </div>
 
-            <br/>
-            <br/>
-            <br/>
-            <div align="center">
+
+            <div class="col-md-12" style="margin-top: 5%">
+
+                <table id="reportTable" class="display cell-border" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>İstasyon Numarası</th>
+                        <th>Harcanan Süre (Dakika)</th>
+                        <th>Detay</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="visit : ${tableData}">
+                        <td th:text="${visit.stationId}">100</td>
+                        <td><span th:text="${visit.totalTime}"></span> dakika</td>
+                        <td>
+                            <a th:href="@{/records/stationtotal/__${visit.stationId}__}">Detay</a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
-
-            <br/>
-            <br/>
-
-
-            <table id="reportTable" class="display cell-border" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>İstasyon Numarası</th>
-                    <th>Harcanan Süre (Dakika)</th>
-                    <th>Detay</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="visit : ${tableData}">
-                    <td th:text="${visit.stationId}">100</td>
-                    <td ><span th:text="${visit.totalTime}"></span> dakika</td>
-                    <td>
-                        <a th:href="@{/records/stationtotal/__${visit.stationId}__}">Detay</a>
-                    </td>
-
-                </tr>
-                </tbody>
-            </table>
-
-
         </div>
     </div>
 </div>
@@ -81,13 +104,17 @@
             "pageLength": 15
         });
 
-        var ctx = $("#myChart").get(0).getContext("2d");
+        var ctx2 = $("#beaconChart").get(0).getContext("2d");
+        var data = /*[[${beaconStat}]]*/;
+        var myBeaconChart = new Chart(ctx2).Doughnut(data);
+
+        var ctx = $("#pieChart").get(0).getContext("2d");
         var data = /*[[${pieData}]]*/;
         var myPieChart = new Chart(ctx).Doughnut(data);
 
-        var ctx = $("#lineChart").get(0).getContext("2d");
+        var ctx1 = $("#lineChart").get(0).getContext("2d");
         var data1 = /*[[${lineData}]]*/;
-        var myBarChart = new Chart(ctx).Line(data1, {
+        var myBarChart = new Chart(ctx1).Line(data1, {
             bezierCurve: false,
             pointDotRadius: 6
         });

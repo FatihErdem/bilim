@@ -17,10 +17,12 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -88,6 +90,7 @@ public class RecordController {
         AggregationResults<VisitReport> results = mongoTemplate.aggregate(aggregation, Visit.class, VisitReport.class);
         List<VisitReport> visitList = results.getMappedResults();
 
+
         List<PieChart> pieChartData = PieChartDataConverter.convertScienceToPieChart(visitList);
         List<VisitReport> tableData = TableDataConverter.convertScienceToDataTable(visitList, mongoTemplate);
         BarChart barData = BarChartDataConverter.scienceToBarChartConverter(visitList);
@@ -118,9 +121,12 @@ public class RecordController {
         AggregationResults<VisitReport> results = mongoTemplate.aggregate(aggregation, Visit.class, VisitReport.class);
         List<VisitReport> visitList = results.getMappedResults();
 
+
+        List<PieChart> uniqueBeaconPieChartList = PieChartDataConverter.convertUniqueBeaconInGalleryToPieChart(galleryName, mongoTemplate);
         List<PieChart> pieChartData = PieChartDataConverter.convertGalleryToPieChart(visitList);
         LineChart lineChart = LineChartDataConverter.convertGalleryToLineChart(visitList);
 
+        model.addAttribute("beaconStat", uniqueBeaconPieChartList);
         model.addAttribute("galleryName", galleryName);
         model.addAttribute("lineData", lineChart);
         model.addAttribute("pieData", pieChartData);
@@ -142,9 +148,11 @@ public class RecordController {
         AggregationResults<VisitReport> results = mongoTemplate.aggregate(aggregation, Visit.class, VisitReport.class);
         List<VisitReport> visitList = results.getMappedResults();
 
+        List<PieChart> beaconStat = PieChartDataConverter.convertUniqueBeaconInStationToPieChart(stationId, mongoTemplate);
         List<PieChart> pieData = PieChartDataConverter.convertStationToPieChart(visitList);
         BarChart barData = BarChartDataConverter.stationToBarChartConverter(visitList);
 
+        model.addAttribute("beaconStat", beaconStat);
         model.addAttribute("barData", barData);
         model.addAttribute("pieData", pieData);
         model.addAttribute("tableData", visitList);
