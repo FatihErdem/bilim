@@ -5,3 +5,4 @@ td.details-control {
 tr.shown td.details-control {
     background: url('../images/details_close.png') no-repeat center center;
 }
+th { white-space: nowrap; }

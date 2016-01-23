@@ -72,10 +72,17 @@
                         <th>Detay</th>
                     </tr>
                     </thead>
+                    <tfoot>
+                    <tr>
+                        <th colspan="1" style="text-align:right">Toplam:</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
                     <tbody>
                     <tr th:each="visit : ${tableData}">
                         <td th:text="${visit.stationId}">100</td>
-                        <td><span th:text="${visit.totalTime}"></span> dakika</td>
+                        <td><span id="deneme" th:text="${visit.totalTime}"></span> dakika</td>
                         <td>
                             <a th:href="@{/records/stationtotal/__${visit.stationId}__}">Detay</a>
                         </td>
@@ -101,7 +108,33 @@
         $('#reportTable').DataTable({
 
             "order": [[0, "asc"]],
-            "pageLength": 15
+            "pageLength": 15,
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                    i.match(/<span [^>]+>([^<]+)<\/span>/)[1] * 1 :
+                            typeof i === 'number' ?
+                                    i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                        .column(1)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                // Total over this page
+
+                // Update footer
+                $(api.column(1).footer()).html(
+                        +total + ' dakika'
+                );
+            }
         });
 
         var ctx2 = $("#beaconChart").get(0).getContext("2d");

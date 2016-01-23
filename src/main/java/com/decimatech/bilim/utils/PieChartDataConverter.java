@@ -116,13 +116,13 @@ public class PieChartDataConverter {
         uniqueBeaconPieChart.setLabel("Tekil ziyaretçi oranı");
         Integer uniquePercent = (int) ((visitReportList.size() * 100) / totalBeaconCount);
         uniqueBeaconPieChart.setValue(uniquePercent);
-        uniqueBeaconPieChart.setColor(color.getColors().get(4));
+        uniqueBeaconPieChart.setColor(color.getColors().get(9));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart);
 
         PieChart uniqueBeaconPieChart2 = new PieChart();
         uniqueBeaconPieChart2.setLabel("Toplam ziyaretçi oranı");
         uniqueBeaconPieChart2.setValue(100 - uniquePercent);
-        uniqueBeaconPieChart2.setColor(color.getColors().get(5));
+        uniqueBeaconPieChart2.setColor(color.getColors().get(10));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart2);
 
         return uniqueBeaconPieChartList;
@@ -149,13 +149,13 @@ public class PieChartDataConverter {
         Integer uniquePercent = (int) ((visitReportList.size() * 100) / totalBeaconCount);
 
         uniqueBeaconPieChart.setValue(uniquePercent);
-        uniqueBeaconPieChart.setColor(color.getColors().get(4));
+        uniqueBeaconPieChart.setColor(color.getColors().get(9));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart);
 
         PieChart uniqueBeaconPieChart2 = new PieChart();
         uniqueBeaconPieChart2.setLabel("Toplam ziyaretçi oranı");
         uniqueBeaconPieChart2.setValue(100 - uniquePercent);
-        uniqueBeaconPieChart2.setColor(color.getColors().get(5));
+        uniqueBeaconPieChart2.setColor(color.getColors().get(10));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart2);
 
         return uniqueBeaconPieChartList;
