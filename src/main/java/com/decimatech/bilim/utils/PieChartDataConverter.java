@@ -24,10 +24,17 @@ public class PieChartDataConverter {
 
         Integer counter = 0;
 
+        Integer totalTime = 0;
+
+        for (VisitReport visit : visitReports) {
+            totalTime = totalTime + visit.getTotalTime();
+        }
+
+
         for (VisitReport visitReport : visitReports) {
             PieChart pieChart = new PieChart();
             pieChart.setLabel(visitReport.getGalleryName());
-            pieChart.setValue(visitReport.getTotalTime());
+            pieChart.setValue(((visitReport.getTotalTime() * 100) / totalTime));
             pieChart.setColor(color.getColors().get(counter));
             pieChartList.add(pieChart);
             counter++;
@@ -35,18 +42,25 @@ public class PieChartDataConverter {
         return pieChartList;
     }
 
-    public static List<PieChart> convertStationToPieChart(List<VisitReport> visitReports){
+    public static List<PieChart> convertStationToPieChart(List<VisitReport> visitReports) {
 
         Color color = new Color();
 
         List<PieChart> pieChartList = new ArrayList<>();
 
+        Integer totalTime = 0;
+
+        for (VisitReport visit : visitReports) {
+            totalTime = totalTime + visit.getTotalTime();
+        }
+
+
         Integer counter = 0;
-        for (VisitReport visit : visitReports){
+        for (VisitReport visit : visitReports) {
             PieChart pieChart = new PieChart();
             pieChart.setLabel("Grup Id " + visit.getBeaconClass().toString());
-            pieChart.setValue(visit.getTotalTime());
             pieChart.setColor(color.getColors().get(counter));
+            pieChart.setValue((visit.getTotalTime() * 100) / totalTime);
             pieChartList.add(pieChart);
             counter++;
         }
@@ -58,6 +72,12 @@ public class PieChartDataConverter {
         List<PieChart> pieChartList = new ArrayList<>();
         Color color = new Color();
 
+        Integer totalTime = 0;
+
+        for (VisitReport visit : visitReports) {
+            totalTime = totalTime + visit.getTotalTime();
+        }
+
         Integer limit = 3;
         Integer counter = 0;
         for (VisitReport visit : visitReports) {
@@ -66,8 +86,8 @@ public class PieChartDataConverter {
             } else {
                 PieChart pieChart = new PieChart();
                 pieChart.setLabel("İstasyon " + visit.getStationId().toString());
-                pieChart.setValue(visit.getTotalTime());
                 pieChart.setColor(color.getColors().get(counter));
+                pieChart.setValue((visit.getTotalTime() * 100) / totalTime);
                 pieChartList.add(pieChart);
                 counter++;
             }
@@ -75,7 +95,7 @@ public class PieChartDataConverter {
         return pieChartList;
     }
 
-    public static List<PieChart> convertUniqueBeaconInGalleryToPieChart(String galleryName, MongoTemplate mongoTemplate){
+    public static List<PieChart> convertUniqueBeaconInGalleryToPieChart(String galleryName, MongoTemplate mongoTemplate) {
 
         Color color = new Color();
 
@@ -92,21 +112,23 @@ public class PieChartDataConverter {
         List<PieChart> uniqueBeaconPieChartList = new ArrayList<>();
         PieChart uniqueBeaconPieChart = new PieChart();
 
-        uniqueBeaconPieChart.setLabel("Tekil ziyaretçi sayisi");
-        uniqueBeaconPieChart.setValue(visitReportList.size());
+
+        uniqueBeaconPieChart.setLabel("Tekil ziyaretçi oranı");
+        Integer uniquePercent = (int) ((visitReportList.size() * 100) / totalBeaconCount);
+        uniqueBeaconPieChart.setValue(uniquePercent);
         uniqueBeaconPieChart.setColor(color.getColors().get(4));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart);
 
         PieChart uniqueBeaconPieChart2 = new PieChart();
-        uniqueBeaconPieChart2.setLabel("Toplam ziyaretçi sayisi");
-        uniqueBeaconPieChart2.setValue(Math.toIntExact(totalBeaconCount));
+        uniqueBeaconPieChart2.setLabel("Toplam ziyaretçi oranı");
+        uniqueBeaconPieChart2.setValue(100 - uniquePercent);
         uniqueBeaconPieChart2.setColor(color.getColors().get(5));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart2);
 
         return uniqueBeaconPieChartList;
     }
 
-    public static List<PieChart> convertUniqueBeaconInStationToPieChart(String stationId, MongoTemplate mongoTemplate){
+    public static List<PieChart> convertUniqueBeaconInStationToPieChart(String stationId, MongoTemplate mongoTemplate) {
 
         Color color = new Color();
 
@@ -123,14 +145,16 @@ public class PieChartDataConverter {
         List<PieChart> uniqueBeaconPieChartList = new ArrayList<>();
         PieChart uniqueBeaconPieChart = new PieChart();
 
-        uniqueBeaconPieChart.setLabel("Tekil ziyaretçi sayisi");
-        uniqueBeaconPieChart.setValue(visitReportList.size());
+        uniqueBeaconPieChart.setLabel("Tekil ziyaretçi oranı");
+        Integer uniquePercent = (int) ((visitReportList.size() * 100) / totalBeaconCount);
+
+        uniqueBeaconPieChart.setValue(uniquePercent);
         uniqueBeaconPieChart.setColor(color.getColors().get(4));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart);
 
         PieChart uniqueBeaconPieChart2 = new PieChart();
-        uniqueBeaconPieChart2.setLabel("Toplam ziyaretçi sayisi");
-        uniqueBeaconPieChart2.setValue(Math.toIntExact(totalBeaconCount));
+        uniqueBeaconPieChart2.setLabel("Toplam ziyaretçi oranı");
+        uniqueBeaconPieChart2.setValue(100 - uniquePercent);
         uniqueBeaconPieChart2.setColor(color.getColors().get(5));
         uniqueBeaconPieChartList.add(uniqueBeaconPieChart2);
 
