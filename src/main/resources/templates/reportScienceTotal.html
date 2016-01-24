@@ -7,7 +7,6 @@
     <link href="/css/customDataTables.css" rel="stylesheet"/>
 
 
-
 </head>
 <body>
 
@@ -58,27 +57,33 @@
                 <table id="reportTable" class="display cell-border" cellspacing="0">
                     <thead>
                     <tr>
+                        <th></th>
                         <th>Galeri ID</th>
                         <th>Galeri Açıklama</th>
                         <th>Harcanan Süre (Dakika)</th>
                         <th>Detay</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
+                        <th></th>
                         <th colspan="2" style="text-align:right">Toplam:</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
                     </tfoot>
                     <tbody>
                     <tr th:each="visit : ${tableData}">
+                        <td></td>
                         <td th:text="${visit.galleryId}">0</td>
                         <td th:text="${visit.galleryName}">Onions</td>
                         <td><span id="deneme" th:text="${visit.totalTime}"></span> dakika</td>
                         <td>
                             <a th:href="@{/records/gallerytotal/__${visit.galleryId}__}">Detay</a>
                         </td>
+                        <td th:text="${visit.groupTimes}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -94,9 +99,54 @@
 <script src="/js/Chart.min.js"></script>
 <script th:inline="javascript">
     /*<![CDATA[*/
+
+    function format(d) {
+        // `d` is the original data object for the row
+
+
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                '<tr>' +
+                '<td>0. no\'lu grubun gecirdigi sure:</td>' +
+                '<td><b>' + d.group_times[0] + ' dakika</b></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>1. no\'lu grubun gecirdigi sure:</td>' +
+                '<td><b>' + d.group_times[1] + ' dakika</b></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>2. no\'lu grubun gecirdigi sure:</td>' +
+                '<td><b>' + d.group_times[2] + ' dakika</b></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td>3. no\'lu grubun gecirdigi sure:</td>' +
+                '<td><b>' + d.group_times[3] + ' dakika</b></td>' +
+                '</tr>' +
+                '</table>';
+    }
+
     $(document).ready(function () {
-        $('#reportTable').DataTable({
-            "order": [[0, "asc"]],
+        var table = $('#reportTable').DataTable({
+            "columnDefs":[
+                {
+                    targets: [5],
+                    "visible":false,
+                    "searchable":false
+                }
+            ],
+            "columns": [
+                {
+                    "className": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {"data": "gallery_id"},
+                {"data": "gallery_desc"},
+                {"data": "total_time"},
+                {"data": "details"},
+                {"data": "group_times"}
+            ],
+            "order": [[1, "asc"]],
             "pageLength": 15,
             "footerCallback": function (row, data, start, end, display) {
                 var api = this.api(), data;
@@ -111,7 +161,7 @@
 
                 // Total over all pages
                 total = api
-                        .column(2)
+                        .column(3)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
@@ -120,8 +170,8 @@
                 // Total over this page
 
                 // Update footer
-                $(api.column(2).footer()).html(
-                         + total + ' dakika'
+                $(api.column(3).footer()).html(
+                        +total + ' dakika'
                 );
             }
         });
@@ -136,9 +186,36 @@
         var myBarChart = new Chart(ctx).Bar(data1, {
             barValueSpacing: 50,
             scaleBeginAtZero: false
+        });
 
+        $('#reportTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+
+            var times = row.data().group_times;
+            if (typeof(times) === "string"){
+                times = times.replace("[", "").trim();
+                times = times.replace("]", "").trim();
+
+                var result = times.split(',').map(Number);
+                row.data().group_times = result;
+            }
+
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
         });
     });
+
+
     /*]]>*/
 
 </script>

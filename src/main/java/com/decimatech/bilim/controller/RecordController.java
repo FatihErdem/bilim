@@ -1,28 +1,21 @@
 package com.decimatech.bilim.controller;
 
 import com.decimatech.bilim.model.*;
-import com.decimatech.bilim.repository.GalleryRepository;
-import com.decimatech.bilim.repository.StationRepository;
 import com.decimatech.bilim.repository.VisitRepository;
 import com.decimatech.bilim.utils.BarChartDataConverter;
 import com.decimatech.bilim.utils.LineChartDataConverter;
 import com.decimatech.bilim.utils.PieChartDataConverter;
 import com.decimatech.bilim.utils.TableDataConverter;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
-
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
-
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -34,12 +27,6 @@ public class RecordController {
 
     @Autowired
     private VisitRepository visitRepository;
-
-    @Autowired
-    private StationRepository stationRepository;
-
-    @Autowired
-    private GalleryRepository galleryRepository;
 
     @Autowired
     MongoTemplate mongoTemplate;
@@ -78,7 +65,7 @@ public class RecordController {
 
 
     @RequestMapping(value = "/sciencetotal", method = RequestMethod.GET)
-    public String getScienceReport(Model model) throws JsonProcessingException {
+    public String getScienceReport(Model model) {
 
         Aggregation aggregation = newAggregation(
                 group("galleryName").sum("elapsedTime").as("totalTime"),
@@ -92,7 +79,7 @@ public class RecordController {
 
 
         List<PieChart> pieChartData = PieChartDataConverter.convertScienceToPieChart(visitList);
-        List<VisitReport> tableData = TableDataConverter.convertScienceToDataTable(visitList, mongoTemplate);
+        List<ReportScienceTable> tableData = TableDataConverter.convertScienceToDataTable(visitList, mongoTemplate);
         BarChart barData = BarChartDataConverter.scienceToBarChartConverter(visitList);
 
         model.addAttribute("barData", barData);
