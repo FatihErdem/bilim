@@ -24,7 +24,20 @@ public class LineChartDataConverter {
             labelList.add(visit.getStationId().toString());
             dataList.add(visit.getTotalTime().toString());
         }
+        for (int i = 0 ; i<dataList.size() -1; i++){
+            for (int j=0 ; j < dataList.size()-i -1  ; j++ ){
+                if (Integer.parseInt(labelList.get(j)) > Integer.parseInt(labelList.get(j+1))){
+                    String temp = dataList.get(j);
+                    dataList.set(j,dataList.get(j+1));
+                    dataList.set(j+1,temp);
 
+                    temp = labelList.get(j);
+                    labelList.set(j,labelList.get(j+1));
+                    labelList.set(j+1,temp);
+                }
+            }
+
+        }
         lineObjects.get(0).setData(dataList);
         lineChart.setLabels(labelList);
         lineChart.setDatasets(lineObjects);

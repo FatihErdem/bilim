@@ -80,7 +80,7 @@ public class RecordController {
 
         List<PieChart> pieChartData = PieChartDataConverter.convertScienceToPieChart(visitList);
         List<ReportScienceTable> tableData = TableDataConverter.convertScienceToDataTable(visitList, mongoTemplate);
-        BarChart barData = BarChartDataConverter.scienceToBarChartConverter(visitList);
+        BarChart barData = BarChartDataConverter.scienceToBarChartConverter(visitList,mongoTemplate);
 
         model.addAttribute("barData", barData);
         model.addAttribute("pieData", pieChartData);

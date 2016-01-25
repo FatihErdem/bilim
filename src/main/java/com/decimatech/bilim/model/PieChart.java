@@ -2,7 +2,7 @@ package com.decimatech.bilim.model;
 
 public class PieChart {
     private String label;
-    private Integer value;
+    private Double value;
     private String color;
 
     public String getColor() {
@@ -21,11 +21,11 @@ public class PieChart {
         this.label = label;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
