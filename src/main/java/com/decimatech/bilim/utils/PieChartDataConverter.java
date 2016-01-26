@@ -158,7 +158,10 @@ public class PieChartDataConverter {
         return uniqueBeaconPieChartList;
     }
     public static double round(double value, int places) {
-        if (places < 0) {
+        if(Double.isNaN(value)){
+            return 0.0;
+        }
+        if (places < 0 ) {
             return value;
         }
         BigDecimal bd = new BigDecimal(value);
