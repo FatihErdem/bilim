@@ -129,7 +129,7 @@ public class RecordController {
     }
 
     @RequestMapping(value = "/stationtotal/{stationId}", method = RequestMethod.GET)
-    private String getStationTotal(@PathVariable("stationId") String stationId, Model model) {
+    private String getStationTotal(@PathVariable("stationId") Integer stationId, Model model) {
 
         Aggregation aggregation = newAggregation(
                 match(where("stationId").is(stationId)),

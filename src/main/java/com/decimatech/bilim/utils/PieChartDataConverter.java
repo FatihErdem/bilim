@@ -125,7 +125,7 @@ public class PieChartDataConverter {
         return uniqueBeaconPieChartList;
     }
 
-    public static List<PieChart> convertUniqueBeaconInStationToPieChart(String stationId, MongoTemplate mongoTemplate) {
+    public static List<PieChart> convertUniqueBeaconInStationToPieChart(Integer stationId, MongoTemplate mongoTemplate) {
 
         Color color = new Color();
 

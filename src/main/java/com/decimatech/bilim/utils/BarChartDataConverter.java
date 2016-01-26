@@ -47,7 +47,7 @@ public class BarChartDataConverter {
         barObject.get(0).setLabel("İstasyon Bazli Veriler");
 
         for(VisitReport visit : visitReport){
-            labelList.add(visit.getBeaconClass().toString());
+            labelList.add(visit.getBeaconClass().toString() + ". Grup");
             dataList.add(visit.getTotalTime().toString());
         }
         barObject.get(0).setData(dataList);

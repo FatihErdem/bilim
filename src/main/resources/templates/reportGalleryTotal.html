@@ -106,7 +106,16 @@
 
     $(document).ready(function () {
         $('#reportTable').DataTable({
-
+            "columnDefs":[
+                {
+                    "targets" : [1],
+                    "searchable" : false
+                },
+                {
+                    "targets" : [2],
+                    "searchable" : false
+                }
+            ],
             "order": [[0, "asc"]],
             "pageLength": 15,
             "footerCallback": function (row, data, start, end, display) {
@@ -154,6 +163,7 @@
         var ctx1 = $("#lineChart").get(0).getContext("2d");
         var data1 = /*[[${lineData}]]*/;
         var myBarChart = new Chart(ctx1).Line(data1, {
+            pointHitDetectionRadius : 10,
             bezierCurve: false,
             tooltipTemplate: "<%= label %> : <%= value %> dakika"
 

@@ -101,7 +101,12 @@
 
     $(document).ready(function () {
         $('#reportTable').DataTable({
-
+            "columnDefs":[
+                {
+                    "targets" : [2],
+                    "searchable" : false
+                }
+            ],
             "order": [[1, "asc"]],
             "pageLength": 15,
             "footerCallback": function (row, data, start, end, display) {

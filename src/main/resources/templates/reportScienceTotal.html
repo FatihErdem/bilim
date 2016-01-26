@@ -4,7 +4,6 @@
     <th:block th:include="layouts/head :: head"></th:block>
     <link href="/css/dataTables.min.css" rel="stylesheet"/>
     <link href="/css/dataTables.bootstrap.css" rel="stylesheet"/>
-    <link href="/css/customDataTables.css" rel="stylesheet"/>
 
 
 </head>
@@ -38,7 +37,7 @@
 
                 <div class="col-md-8">
                     <div align="center" class="row">
-                        <canvas style="margin-left: 50px" id="barChart" width="750" height="250"></canvas>
+                        <canvas  id="barChart" width="750" height="250"></canvas>
                         <br/>
                         <br/>
                     </div>
@@ -130,6 +129,18 @@
                     targets: [5],
                     "visible":false,
                     "searchable":false
+                },
+                {
+                    "targets" : [0],
+                    "searchable" : false
+                },
+                {
+                    "targets" : [3],
+                    "searchable" : false
+                },
+                {
+                    "targets" : [4],
+                    "searchable" : false
                 }
             ],
             "columns": [
@@ -186,7 +197,7 @@
         var ctx = $("#barChart").get(0).getContext("2d");
         var data1 = /*[[${barData}]]*/;
         var myBarChart = new Chart(ctx).Bar(data1, {
-            barValueSpacing: 50,
+            barValueSpacing: 25,
             scaleBeginAtZero: false,
             tooltipTemplate: "<%= label %> : <%= value %> dakika"
 
