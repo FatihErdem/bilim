@@ -106,6 +106,19 @@
 
     $(document).ready(function () {
         $('#reportTable').DataTable({
+            language: {
+                search: "Tabloda Ara: ",
+                lengthMenu:"_MENU_ Kayıt Göster",
+                zeroRecords: "Sonuç Bulunamadı",
+                emptyTable: "Veri Yok",
+                "sInfo":         "  _TOTAL_ Kayıttan _START_ - _END_ Arası Kayıtlar Gösteriliyor",
+                paginate: {
+                    first:      "İlk",
+                    previous:   "Önceki",
+                    next:       "Sonraki",
+                    last:       "Son"
+                }
+            },
             "columnDefs":[
                 {
                     "targets" : [1],
@@ -116,6 +129,7 @@
                     "searchable" : false
                 }
             ],
+            "lengthMenu": [ [15, 25, 50, -1], [15, 25, 50, "Hepsi"] ],
             "order": [[0, "asc"]],
             "pageLength": 15,
             "footerCallback": function (row, data, start, end, display) {
