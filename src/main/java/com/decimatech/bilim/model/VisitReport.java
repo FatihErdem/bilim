@@ -48,6 +48,12 @@ public class VisitReport {
         this.galleryName = galleryName;
     }
 
+    public VisitReport(String galleryName,Integer galleryId,Integer totalTime) {
+
+        this.galleryName = galleryName;
+        this.galleryId = galleryId;
+        this.totalTime = totalTime;
+    }
     @Override
     public String toString() {
         return "VisitReport{" +

@@ -178,14 +178,18 @@
 
         var ctx = $("#pieChart").get(0).getContext("2d");
         var data = /*[[${pieData}]]*/;
-        var myPieChart = new Chart(ctx).Doughnut(data);
+        var myPieChart = new Chart(ctx).Doughnut(data, {
+            tooltipTemplate: "<%= label %> : %<%= value %>"
+        });
 
 
         var ctx = $("#barChart").get(0).getContext("2d");
         var data1 = /*[[${barData}]]*/;
         var myBarChart = new Chart(ctx).Bar(data1, {
             barValueSpacing: 50,
-            scaleBeginAtZero: false
+            scaleBeginAtZero: false,
+            tooltipTemplate: "<%= label %> : <%= value %> dakika"
+
         });
 
         $('#reportTable tbody').on('click', 'td.details-control', function () {

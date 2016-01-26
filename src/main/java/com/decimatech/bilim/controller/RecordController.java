@@ -7,6 +7,7 @@ import com.decimatech.bilim.utils.LineChartDataConverter;
 import com.decimatech.bilim.utils.PieChartDataConverter;
 import com.decimatech.bilim.utils.TableDataConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.AutoConfigurationReportEndpoint;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -80,6 +82,10 @@ public class RecordController {
 
         List<PieChart> pieChartData = PieChartDataConverter.convertScienceToPieChart(visitList);
         List<ReportScienceTable> tableData = TableDataConverter.convertScienceToDataTable(visitList, mongoTemplate);
+        visitList = new ArrayList<>();
+        for(ReportScienceTable data : tableData){
+            visitList.add(new VisitReport(data.getGalleryName(),data.getGalleryId(),data.getTotalTime()));
+        }
         BarChart barData = BarChartDataConverter.scienceToBarChartConverter(visitList,mongoTemplate);
 
         model.addAttribute("barData", barData);

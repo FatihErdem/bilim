@@ -134,17 +134,25 @@
 
         var ctx = $("#pieChart").get(0).getContext("2d");
         var data = /*[[${pieData}]]*/;
-        var myPieChart = new Chart(ctx).Doughnut(data);
+        var myPieChart = new Chart(ctx).Doughnut(data, {
+            tooltipTemplate: "<%= label %> : %<%= value %>"
+
+        });
 
         var ctx1 = $("#beaconChart").get(0).getContext("2d");
         var data2 = /*[[${beaconStat}]]*/;
-        var myPieChart = new Chart(ctx1).Doughnut(data2);
+        var myPieChart = new Chart(ctx1).Doughnut(data2, {
+            tooltipTemplate: "<%= label %> : %<%= value %>"
+
+        });
 
         var ctx = $("#lineChart").get(0).getContext("2d");
         var data1 = /*[[${barData}]]*/;
         var myBarChart = new Chart(ctx).Bar(data1, {
             barValueSpacing: 50,
             scaleBeginAtZero: false,
+            tooltipTemplate: "<%= label %> : <%= value %> dakika"
+
         });
     });
     /*]]>*/
