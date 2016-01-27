@@ -47,7 +47,7 @@ public class BeaconController {
 //        Date date = new Date();
 //        System.out.println(date.toString()); // (i.e. Europe/Moscow)
 
-            return "redirect:/beacons/create";
+            return "redirect:/beacons";
         }
     }
 }

@@ -108,28 +108,28 @@
         $('#reportTable').DataTable({
             language: {
                 search: "Tabloda Ara: ",
-                lengthMenu:"_MENU_ Kayıt Göster",
+                lengthMenu: "_MENU_ Kayıt Göster",
                 zeroRecords: "Sonuç Bulunamadı",
                 emptyTable: "Veri Yok",
-                "sInfo":         "  _TOTAL_ Kayıttan _START_ - _END_ Arası Kayıtlar Gösteriliyor",
+                "sInfo": "  _TOTAL_ Kayıttan _START_ - _END_ Arası Kayıtlar Gösteriliyor",
                 paginate: {
-                    first:      "İlk",
-                    previous:   "Önceki",
-                    next:       "Sonraki",
-                    last:       "Son"
+                    first: "İlk",
+                    previous: "Önceki",
+                    next: "Sonraki",
+                    last: "Son"
                 }
             },
-            "columnDefs":[
+            "columnDefs": [
                 {
-                    "targets" : [1],
-                    "searchable" : false
+                    "targets": [1],
+                    "searchable": false
                 },
                 {
-                    "targets" : [2],
-                    "searchable" : false
+                    "targets": [2],
+                    "searchable": false
                 }
             ],
-            "lengthMenu": [ [15, 25, 50, -1], [15, 25, 50, "Hepsi"] ],
+            "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Hepsi"]],
             "order": [[0, "asc"]],
             "pageLength": 15,
             "footerCallback": function (row, data, start, end, display) {
@@ -177,7 +177,7 @@
         var ctx1 = $("#lineChart").get(0).getContext("2d");
         var data1 = /*[[${lineData}]]*/;
         var myBarChart = new Chart(ctx1).Line(data1, {
-            pointHitDetectionRadius : 10,
+            pointHitDetectionRadius: 10,
             bezierCurve: false,
             tooltipTemplate: "<%= label %> : <%= value %> dakika"
 

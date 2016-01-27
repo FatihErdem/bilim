@@ -43,7 +43,7 @@ public class StationController {
             return "stationForm";
         }else{
             stationRepository.save(station);
-            return "redirect:/stations/create";
+            return "redirect:/stations";
         }
     }
 
