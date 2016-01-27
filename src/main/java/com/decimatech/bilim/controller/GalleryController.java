@@ -20,23 +20,23 @@ public class GalleryController {
     private GalleryRepository galleryRepository;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String getGalleriesList(Model model){
+    public String getGalleriesList(Model model) {
 
         model.addAttribute("galleries", galleryRepository.findAll());
         return "galleriesList";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String getGalleryForm(@ModelAttribute Gallery gallery){
+    public String getGalleryForm(@ModelAttribute Gallery gallery) {
         return "galleryForm";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createGallery(@Valid @ModelAttribute Gallery gallery, BindingResult bindingResult){
+    public String createGallery(@Valid @ModelAttribute Gallery gallery, BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "galleryForm";
-        }else{
+        } else {
             galleryRepository.save(gallery);
             return "redirect:/galleries";
         }

@@ -2,6 +2,8 @@ package com.decimatech.bilim.controller;
 
 import com.decimatech.bilim.model.Beacon;
 import com.decimatech.bilim.repository.BeaconRepository;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,21 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 @Controller
 @RequestMapping(value = "/beacons")
 public class BeaconController {
 
-
+    private Log log = LogFactory.getLog(Beacon.class);
     @Autowired
     private BeaconRepository beaconRepository;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getBeaconList(Model model) {
         model.addAttribute("beacons", beaconRepository.findAll());
+
+        log.info("Beaconlar Listelendi");
+
         return "beaconList";
     }
 

@@ -5,7 +5,6 @@ import com.decimatech.bilim.model.Station;
 import com.decimatech.bilim.repository.GalleryRepository;
 import com.decimatech.bilim.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.instrument.classloading.glassfish.GlassFishLoadTimeWeaver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,7 +26,7 @@ public class StationController {
     private GalleryRepository galleryRepository;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String getStationList(Model model){
+    public String getStationList(Model model) {
         model.addAttribute("stations", stationRepository.findAll());
         return "stationList";
 
@@ -36,19 +34,19 @@ public class StationController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    private String createStation(@ModelAttribute Station station, BindingResult bindingResult){
+    private String createStation(@ModelAttribute Station station, BindingResult bindingResult) {
 
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "stationForm";
-        }else{
+        } else {
             stationRepository.save(station);
             return "redirect:/stations";
         }
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String getStationForm(Model model){
+    public String getStationForm(Model model) {
         Station station = new Station();
 
         List<Gallery> galleries = galleryRepository.findAll();

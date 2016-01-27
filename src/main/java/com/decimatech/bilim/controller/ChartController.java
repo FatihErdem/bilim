@@ -10,13 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Controller
 @RequestMapping(value = "/charts")
@@ -26,7 +23,7 @@ public class ChartController {
     private MongoTemplate mongoTemplate;
 
     @RequestMapping(value = "/sciencetotal", method = RequestMethod.GET)
-    public String getScienceTotalChart(Model model){
+    public String getScienceTotalChart(Model model) {
         Aggregation aggregation = newAggregation(
                 group("galleryName").sum("elapsedTime").as("value"),
                 project("_id", "value")

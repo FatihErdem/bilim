@@ -3,12 +3,19 @@ package com.decimatech.bilim.model;
 import java.util.List;
 
 public class BarObject {
-    private String label;
     public String fillColor;
     public String strokeColor;
     public String highlightFill;
     public String highlightStroke;
+    private String label;
     private List<String> data;
+
+    public BarObject() {
+        this.fillColor = "rgba(151,187,205,0.5)";
+        this.strokeColor = "rgba(151,187,205,0.8)";
+        this.highlightFill = "rgba(151,187,205,0.75)";
+        this.highlightStroke = "rgba(151,187,205,1)";
+    }
 
     public String getLabel() {
         return label;
@@ -24,13 +31,6 @@ public class BarObject {
 
     public void setData(List<String> data) {
         this.data = data;
-    }
-
-    public BarObject() {
-        this.fillColor = "rgba(151,187,205,0.5)";
-        this.strokeColor = "rgba(151,187,205,0.8)";
-        this.highlightFill = "rgba(151,187,205,0.75)";
-        this.highlightStroke = "rgba(151,187,205,1)";
     }
 
     @Override

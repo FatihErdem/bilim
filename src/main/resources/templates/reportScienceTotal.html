@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:include="layouts/head :: head"></th:block>
     <link href="/css/dataTables.min.css" rel="stylesheet"/>
@@ -37,7 +37,7 @@
 
                 <div class="col-md-8">
                     <div align="center" class="row">
-                        <canvas  id="barChart" width="750" height="250"></canvas>
+                        <canvas id="barChart" width="750" height="250"></canvas>
                         <br/>
                         <br/>
                     </div>
@@ -138,23 +138,23 @@
                 }
             },
 
-            "columnDefs":[
+            "columnDefs": [
                 {
                     targets: [5],
-                    "visible":false,
-                    "searchable":false
+                    "visible": false,
+                    "searchable": false
                 },
                 {
-                    "targets" : [0],
-                    "searchable" : false
+                    "targets": [0],
+                    "searchable": false
                 },
                 {
-                    "targets" : [3],
-                    "searchable" : false
+                    "targets": [3],
+                    "searchable": false
                 },
                 {
-                    "targets" : [4],
-                    "searchable" : false
+                    "targets": [4],
+                    "searchable": false
                 }
             ],
             "columns": [
@@ -170,7 +170,7 @@
                 {"data": "details"},
                 {"data": "group_times"}
             ],
-            "lengthMenu": [ [15, 25, 50, -1], [15, 25, 50, "Hepsi"] ],
+            "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Hepsi"]],
             "order": [[1, "asc"]],
             "pageLength": 15,
             "footerCallback": function (row, data, start, end, display) {
@@ -223,7 +223,7 @@
             var row = table.row(tr);
 
             var times = row.data().group_times;
-            if (typeof(times) === "string"){
+            if (typeof(times) === "string") {
                 times = times.replace("[", "").trim();
                 times = times.replace("]", "").trim();
 

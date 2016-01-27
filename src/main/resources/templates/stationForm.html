@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:include="layouts/head :: head"></th:block>
 
@@ -35,11 +35,12 @@
                             <label for="location">İstasyon Konumu</label>
 
                             <!--<select th:field="*{location}" id="location" class="form-control">-->
-                                <!--<option th:each="location : ${T(com.decimatech.bilim.model.Station.Location).values()}-->
-                                <!--" th:value="${location}" th:text="${location}"></option>-->
+                            <!--<option th:each="location : ${T(com.decimatech.bilim.model.Station.Location).values()}-->
+                            <!--" th:value="${location}" th:text="${location}"></option>-->
                             <!--</select>-->
                             <select th:field="${station.galleryName}" id="location" class="form-control">
-                                <option th:each="gallery : ${galleries}" th:value="${gallery.galleryName}" th:text="${gallery.getGalleryName()}"></option>
+                                <option th:each="gallery : ${galleries}" th:value="${gallery.galleryName}"
+                                        th:text="${gallery.getGalleryName()}"></option>
                             </select>
 
                         </div>

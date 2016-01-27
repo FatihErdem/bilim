@@ -18,48 +18,49 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @SpringBootApplication
 public class BilimMerkeziApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BilimMerkeziApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BilimMerkeziApplication.class, args);
+    }
 
-	@Bean
-	public MongoClientFactoryBean mongoClientFactoryBean() {
-		MongoClientFactoryBean factoryBean = new MongoClientFactoryBean();
-		factoryBean.setHost("localhost");
-		factoryBean.setPort(27017);
-		return factoryBean;
-	}
+    @Bean
+    public MongoClientFactoryBean mongoClientFactoryBean() {
+        MongoClientFactoryBean factoryBean = new MongoClientFactoryBean();
+        factoryBean.setHost("localhost");
+        factoryBean.setPort(27017);
+        return factoryBean;
+    }
 
-	@Bean
-	public MongoOperations mongoTemplate(Mongo mongo) {
-		return new MongoTemplate(mongo, "bilim");
-	}
+    @Bean
+    public MongoOperations mongoTemplate(Mongo mongo) {
+        return new MongoTemplate(mongo, "bilim");
+    }
 
 
-	@Bean
-	public MessageSource messageSource() {
-		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("messages");
-		messageSource.setDefaultEncoding("UTF-8");
-		return messageSource;
-	}
-	@Bean
-	public ValidatingMongoEventListener validatingMongoEventListener() {
-		return new ValidatingMongoEventListener(validator());
-	}
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
 
-	@Bean
-	public LocalValidatorFactoryBean validator() {
-		return new LocalValidatorFactoryBean();
-	}
+    @Bean
+    public ValidatingMongoEventListener validatingMongoEventListener() {
+        return new ValidatingMongoEventListener(validator());
+    }
 
-	@Bean
-	@Order(Ordered.HIGHEST_PRECEDENCE)
-	CharacterEncodingFilter characterEncodingFilter() {
-		CharacterEncodingFilter filter = new CharacterEncodingFilter();
-		filter.setEncoding("UTF-8");
-		filter.setForceEncoding(true);
-		return filter;
-	}
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
+    }
+
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    CharacterEncodingFilter characterEncodingFilter() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        return filter;
+    }
 
 }

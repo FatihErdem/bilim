@@ -14,7 +14,7 @@ public class Beacon {
     @Id
     private String id;
 
-    private Integer batteryLevel =100;
+    private Integer batteryLevel = 100;
     private Integer beaconClass = 0;
     @NotEmpty
     private String beaconUUID;
