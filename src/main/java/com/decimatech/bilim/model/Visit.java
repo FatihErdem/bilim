@@ -1,12 +1,17 @@
 package com.decimatech.bilim.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Document(collection = "visits")
+@CompoundIndexes(
+        @CompoundIndex(name = "reports2", def = "{'galleryName':1, 'stationId':1}")
+)
 public class Visit {
 
     @Id

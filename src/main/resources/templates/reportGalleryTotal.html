@@ -177,9 +177,9 @@
         var ctx1 = $("#lineChart").get(0).getContext("2d");
         var data1 = /*[[${lineData}]]*/;
         var myBarChart = new Chart(ctx1).Line(data1, {
-            pointHitDetectionRadius: 10,
+            pointHitDetectionRadius: 7,
             bezierCurve: false,
-            tooltipTemplate: "<%= label %> : <%= value %> dakika"
+            tooltipTemplate: "<%= label %>. İstasyon : <%= value %> dakika"
 
         });
     });
