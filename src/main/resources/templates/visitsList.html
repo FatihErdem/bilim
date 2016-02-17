@@ -14,28 +14,31 @@
 <div id="wrapper">
     <div id="page-wrapper">
         <div class="container-fluid">
-            <h2 style="text-align: center">Kayıtlı İstasyonların Listesi</h2>
+            <h2 style="text-align: center">Kayıtlı Ziyaretlerin Listesi</h2>
             <br/>
             <br/>
             <br/>
 
 
-            <table id="stationTable" class="display cell-border" cellspacing="0">
+            <table id="visitTable" class="display cell-border" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>İstasyon ID</th>
-                    <th>İstasyon Konumu</th>
-                    <th>İstasyon Adı</th>
-                    <th>İstasyon IP</th>
+                    <th>Visit ID</th>
+                    <th>İstasyon Id</th>
+                    <th>Beacon UUID</th>
+                    <th>Beacon Sınıfı</th>
+                    <th>Galeri Adı</th>
+                    <th>Geçirilen Süre</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="station : ${stations}">
-                    <td th:text="${station.stationId}">Onions</td>
-                    <td th:text="${station.galleryName}">Yok</td>
-                    <td th:text="${station.stationName}">Yok</td>
-                    <td th:text="${station.stationIp}">Yok</td>
-
+                <tr th:each="visit : ${visits}">
+                    <td th:text="${visit.id}">Onions</td>
+                    <td th:text="${visit.stationId}">Onions</td>
+                    <td th:text="${visit.beaconUUID}">Yok</td>
+                    <td th:text="${visit.beaconClass}">Yok</td>
+                    <td th:text="${visit.galleryName}">Yok</td>
+                    <td th:text="${visit.elapsedTime}">Yok</td>
                 </tr>
                 </tbody>
             </table>
@@ -51,7 +54,7 @@
 <script src="/js/dataTables.bootstrap.js"></script>
 <script>
     $(document).ready(function () {
-        $('#stationTable').DataTable({
+        $('#visitTable').DataTable({
             language: {
                 search: "Tabloda Ara: ",
                 lengthMenu: "_MENU_ Kayıt Göster",
@@ -67,7 +70,7 @@
             },
             "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "Hepsi"]],
             "order": [[0, "asc"]],
-            "pageLength": 15
+            "pageLength": 50
 
         });
     });
