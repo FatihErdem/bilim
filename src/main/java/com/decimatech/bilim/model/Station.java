@@ -13,7 +13,10 @@ public class Station {
 
     @NotNull
     private Integer stationId;
+    private String stationName;
     private String galleryName;
+    private String stationIp;
+
 
     public String getGalleryName() {
         return galleryName;
@@ -39,12 +42,30 @@ public class Station {
         this.stationId = stationId;
     }
 
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
+    public String getStationIp() {
+        return stationIp;
+    }
+
+    public void setStationIp(String stationIp) {
+        this.stationIp = stationIp;
+    }
+
     @Override
     public String toString() {
         return "Station{" +
                 "id='" + id + '\'' +
                 ", stationId=" + stationId +
+                ", stationName='" + stationName + '\'' +
                 ", galleryName='" + galleryName + '\'' +
+                ", stationIp='" + stationIp + '\'' +
                 '}';
     }
 }

@@ -11,31 +11,31 @@
 
 <th:block th:include="layouts/main :: main"></th:block>
 
-
-<div id="page-wrapper">
-    <div class="container">
-        <h2 style="text-align: center">Kayıtlı Galerilerin Listesi</h2>
-        <br/>
-        <br/>
-        <br/>
-
-
-        <table id="galleryTable" class="display cell-border" cellspacing="0">
-            <thead>
-            <tr>
-                <th>Galeri ID</th>
-                <th>Galeri Açıklama</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="gallery : ${galleries}">
-                <td th:text="${gallery.galleryId}">12</td>
-                <td th:text="${gallery.galleryName}">Galeri Aciklama</td>
-            </tr>
-            </tbody>
-        </table>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <h2 style="text-align: center">Kayıtlı Galerilerin Listesi</h2>
+            <br/>
+            <br/>
+            <br/>
 
 
+            <table id="galleryTable" class="display cell-border" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Galeri ID</th>
+                    <th>Galeri Açıklama</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="gallery : ${galleries}">
+                    <td th:text="${gallery.galleryId}">12</td>
+                    <td th:text="${gallery.galleryName}">Galeri Aciklama</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
     </div>
 </div>
 

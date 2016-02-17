@@ -25,12 +25,16 @@
             <tr>
                 <th>İstasyon ID</th>
                 <th>İstasyon Konumu</th>
+                <th>İstasyon Adı</th>
+                <th>İstasyon IP</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="station : ${stations}">
                 <td th:text="${station.stationId}">Onions</td>
                 <td th:text="${station.galleryName}">Yok</td>
+                <td th:text="${station.stationName}">Yok</td>
+                <td th:text="${station.stationIp}">Yok</td>
 
             </tr>
             </tbody>
