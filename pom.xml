@@ -85,6 +85,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
+                            <executable>true</executable>
                             <finalName>bilim</finalName>
                         </configuration>
                     </execution>

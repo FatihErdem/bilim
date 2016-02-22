@@ -20,7 +20,7 @@ public class TableDataConverter {
     public static List<ReportScienceTable> convertScienceToDataTable(List<VisitReport> visitReportsList, MongoTemplate mongoTemplate) {
 
         List<Gallery> galleryList = mongoTemplate.find(new Query(), Gallery.class);
-        List<Integer> beaconClassList = mongoTemplate.getCollection("beacons").distinct("beaconClass");
+        List<Integer> beaconClassList = mongoTemplate.getCollection("visits").distinct("beaconClass");
         List<ReportScienceTable> responseList = new ArrayList<>();
 
         Aggregation aggregation = newAggregation(

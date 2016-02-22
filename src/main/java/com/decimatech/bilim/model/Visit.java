@@ -16,6 +16,7 @@ public class Visit {
 
     @Id
     private String id;
+    // TODO Make stationId Integer
     private String stationId;
     private String beaconUUID;
     private Integer batteryLevel;

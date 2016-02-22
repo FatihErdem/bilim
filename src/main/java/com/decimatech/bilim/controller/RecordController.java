@@ -146,7 +146,7 @@ public class RecordController {
         Long startTime = System.nanoTime();
 
         Aggregation aggregation = newAggregation(
-                match(where("stationId").is(stationId)),
+                match(where("stationId").is(stationId.toString())),
                 group("stationId", "beaconClass").sum("elapsedTime").as("totalTime"),
                 project("stationId", "beaconClass", "totalTime")
                         .and("totalTime").divide(60).as("totalTime")
